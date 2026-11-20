@@ -316,3 +316,9 @@ section{padding:64px 0}
   .cutout,.cutout img{height:auto}
   .cutout img{max-height:max(560px,calc(100vh - 130px));width:auto}
 }
+/* Gold strip: moving glow left to right */
+.pillbar{position:relative;overflow:hidden}
+.pillbar .wrap{position:relative;z-index:1}
+.pillbar::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(100deg,transparent 0%,rgba(255,248,225,.0) 20%,rgba(255,248,225,.75) 50%,rgba(255,248,225,0) 80%,transparent 100%);transform:translateX(-120%);animation:goldsweep 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes goldsweep{0%{transform:translateX(-120%)}70%,100%{transform:translateX(320%)}}
+@media (prefers-reduced-motion:reduce){.pillbar::after{animation:none;display:none}}
