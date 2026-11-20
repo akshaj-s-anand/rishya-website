@@ -275,3 +275,21 @@ section{padding:64px 0}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.side img,.tile .im img{transition:none}}
 .visit .actions,.about .actions{justify-content:flex-start}
 .hero-left .lead{color:var(--gold-100)}
+
+/* v2.1 hero: one solid plum section with cut-out portrait */
+.hero{background:var(--plum-900)}
+.hero-left{background:none}
+.hero-right{background:none;padding:0 20px;align-items:end;place-items:end center}
+.hero-right::before{display:none}
+.cutout{position:relative;margin:0;width:min(100%,440px);display:grid;place-items:end center}
+.cutout img{position:relative;z-index:1;width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.35))}
+.cutout .halo{position:absolute;z-index:0;left:50%;top:6%;width:88%;aspect-ratio:1/1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(232,204,134,.38),rgba(205,165,82,.12) 55%,transparent 70%);box-shadow:inset 0 0 0 1.5px rgba(232,204,134,.55)}
+.cutout::after{content:"";position:absolute;z-index:2;left:-20px;right:-20px;bottom:0;height:3px;background:var(--goldgrad)}
+@media (min-width:1024px){
+  .hero{background:radial-gradient(70% 90% at 72% 40%,#4B1B50 0%,var(--plum-800) 45%,var(--plum-900) 100%)}
+  .hero-grid{grid-template-columns:50% 50%;align-items:end}
+  .hero-left{align-self:center}
+  .hero-right{padding:48px 40px 0;height:100%}
+  .cutout{width:min(100%,560px)}
+}
+@media (max-width:1023px){.hero{background:radial-gradient(120% 60% at 50% 20%,#4B1B50 0%,var(--plum-800) 45%,var(--plum-900) 100%)}}
