@@ -293,3 +293,4 @@ section{padding:64px 0}
   .cutout{width:min(100%,560px)}
 }
 @media (max-width:1023px){.hero{background:radial-gradient(120% 60% at 50% 20%,#4B1B50 0%,var(--plum-800) 45%,var(--plum-900) 100%)}}
+.benefit .coin{color:var(--plum-900)}.benefit .coin svg{stroke-width:1.9}
