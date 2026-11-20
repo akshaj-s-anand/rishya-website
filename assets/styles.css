@@ -300,3 +300,19 @@ section{padding:64px 0}
 }
 @media (min-width:1024px){.hero-left .actions{max-width:none;flex-wrap:nowrap}}
 @media (min-width:1024px){.cutout{width:min(100%,500px)}}
+/* v2.2: hero fits one screen height on desktop */
+@media (min-width:1024px){
+  .hero-grid{height:calc(100vh - 90px);min-height:600px;max-height:none}
+  .hero-left{padding-top:32px;padding-bottom:32px;gap:12px}
+  .hero-left .logo{width:96px;height:96px}
+  .hero-left h1{font-size:clamp(2.5rem,3.6vw,3.6rem)}
+  .hero-left .script{font-size:2.2rem}
+  .hero-right{padding:28px 40px 0;height:100%;min-height:0}
+  .cutout{display:block;width:auto;height:100%;max-width:100%}
+  .cutout img{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom}
+}
+@media (min-width:1024px){
+  .hero-grid{overflow:hidden}
+  .cutout,.cutout img{height:auto}
+  .cutout img{max-height:max(560px,calc(100vh - 130px));width:auto}
+}
