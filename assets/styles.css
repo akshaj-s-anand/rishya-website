@@ -322,3 +322,10 @@ section{padding:64px 0}
 .pillbar::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(100deg,transparent 0%,rgba(255,248,225,.0) 20%,rgba(255,248,225,.75) 50%,rgba(255,248,225,0) 80%,transparent 100%);transform:translateX(-120%);animation:goldsweep 4.5s ease-in-out infinite;pointer-events:none}
 @keyframes goldsweep{0%{transform:translateX(-120%)}70%,100%{transform:translateX(320%)}}
 @media (prefers-reduced-motion:reduce){.pillbar::after{animation:none;display:none}}
+/* Move the strip's own gold glow left to right (replaces overlay sweep) */
+.pillbar::after{display:none}
+.pillbar{background:linear-gradient(90deg,#A9792E 0%,#C99A46 20%,#E3C27A 35%,#F6E3B0 50%,#E3C27A 65%,#C99A46 80%,#A9792E 100%);background-size:300% 100%;animation:goldglow 6s linear infinite}
+@keyframes goldglow{from{background-position:100% 0}to{background-position:0% 0}}
+@media (prefers-reduced-motion:reduce){.pillbar{animation:none;background-position:50% 0}}
+.pillbar{background:linear-gradient(90deg,#A9792E 0%,#C99A46 22%,#E3C27A 38%,#F6E3B0 50%,#E3C27A 62%,#C99A46 78%,#A9792E 100%) 0 0/200vw 100% repeat-x;animation:goldglow 7s linear infinite}
+@keyframes goldglow{from{background-position:0 0}to{background-position:200vw 0}}
