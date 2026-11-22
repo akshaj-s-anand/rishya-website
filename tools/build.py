@@ -117,7 +117,7 @@ def page(title, desc, body, current, head_extra=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=3">
+<link rel="stylesheet" href="assets/styles.css?v=4">
 <script>try{{if(sessionStorage.getItem("rishya-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("no-intro");else document.documentElement.classList.add("intro-on")}}catch(e){{document.documentElement.classList.add("no-intro")}}</script>
 <script type="application/ld+json">{json.dumps(SCHEMA)}</script>
 </head>
@@ -320,7 +320,7 @@ home = f"""<section class="hero">
       {actions("Text to book")}
     </div>
     <div class="hero-right">
-      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-cutout.webp?v=3" alt="Your therapist at Rishya Beauty Lounge" width="694" height="1000" fetchpriority="high"></figure>
+      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-blazer-cutout.webp?v=1" alt="Your therapist at Rishya Beauty Lounge" width="760" height="1108" fetchpriority="high"></figure>
     </div>
   </div>
 </section>
