@@ -341,3 +341,10 @@ section{padding:64px 0}
 @media (min-width:720px){.wa-float{right:28px;bottom:28px;padding:0 18px 0 14px}.wa-float span{display:inline}}
 @media (min-width:1024px){.site-footer{padding-bottom:56px}}
 @media (prefers-reduced-motion:reduce){.wa-float::before{animation:none}}
+/* WhatsApp button: circle by default, expands to pill on hover (desktop) */
+@media (min-width:720px){
+  .wa-float{width:auto;min-width:60px;padding:0 14px;gap:0;transition:padding .35s ease,gap .35s ease,transform .15s,box-shadow .15s}
+  .wa-float span{display:inline-block;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;padding-right:0;transition:max-width .35s ease,opacity .25s ease,padding .35s ease}
+  .wa-float:hover,.wa-float:focus-visible{padding:0 20px 0 14px;gap:10px}
+  .wa-float:hover span,.wa-float:focus-visible span{max-width:140px;opacity:1;padding-right:2px}
+}
