@@ -1,0 +1,235 @@
+{
+ "phone": "778-392-7296",
+ "address": "58 Saddlecreek Crescent NE, Calgary, AB T3J 4R9",
+ "hours": "Monday to Friday 9:00 to 18:00 and Saturday 11:00 to 17:00 (closed Sunday)",
+ "massages": [
+  {
+   "name": "Relaxation Deep Tissue",
+   "prices": [
+    "60 min $110",
+    "90 min $160"
+   ],
+   "desc": "Firm, slow pressure for tight, overworked muscles. Includes hot stone and hot towel.",
+   "keys": [
+    "deep tissue",
+    "relaxation deep tissue"
+   ]
+  },
+  {
+   "name": "Therapeutic Massage",
+   "prices": [
+    "90 min $170"
+   ],
+   "desc": "Our most complete session. Includes cupping, trigger points, hot stone and hot towel.",
+   "keys": [
+    "therapeutic",
+    "therapeutic massage"
+   ]
+  },
+  {
+   "name": "Hot Stone Swedish Massage",
+   "prices": [
+    "60 min $110",
+    "90 min $160"
+   ],
+   "desc": "Long, flowing Swedish strokes with smooth warmed stones to melt tension.",
+   "keys": [
+    "hot stone",
+    "hot stone swedish massage"
+   ]
+  },
+  {
+   "name": "Lymphatic Drainage",
+   "prices": [
+    "60 min $120",
+    "90 min $170"
+   ],
+   "desc": "A gentle, rhythmic light-touch technique that feels calm and soothing.",
+   "keys": [
+    "lymphatic",
+    "lymphatic drainage"
+   ]
+  },
+  {
+   "name": "Prenatal & Postnatal Massage",
+   "prices": [
+    "60 min $125",
+    "90 min $170"
+   ],
+   "desc": "Side-lying comfort with supportive pillows. Add-on: stomach massage $30.",
+   "keys": [
+    "postnatal",
+    "prenatal",
+    "prenatal & postnatal massage",
+    "pregnan"
+   ]
+  },
+  {
+   "name": "TMJ Massage",
+   "prices": [
+    "60 min $120"
+   ],
+   "desc": "Relieves jaw tension, reduces pain and improves mobility.",
+   "keys": [
+    "tmj",
+    "tmj massage",
+    "jaw"
+   ]
+  },
+  {
+   "name": "Head, Neck, Shoulder & Foot",
+   "prices": [
+    "60 min $100"
+   ],
+   "desc": "Focused work where most of us hold stress, finished with a foot massage.",
+   "keys": [
+    "head, neck",
+    "head, neck, shoulder & foot"
+   ]
+  },
+  {
+   "name": "Healing Energy Massage",
+   "prices": [
+    "60 min $100"
+   ],
+   "desc": "A slow, grounding session to calm the mind and restore balance.",
+   "keys": [
+    "healing energy",
+    "healing energy massage"
+   ]
+  },
+  {
+   "name": "Relaxation Facial Massage",
+   "prices": [
+    "60 min $100"
+   ],
+   "desc": "Includes deep cleansing, exfoliation, steam, face pack and face massage.",
+   "keys": [
+    "facial",
+    "relaxation facial",
+    "relaxation facial massage"
+   ]
+  },
+  {
+   "name": "Buccal Facial Massage",
+   "prices": [
+    "60 min $120"
+   ],
+   "desc": "A sculpting facial massage that works the cheek and jaw muscles for a lifted look.",
+   "keys": [
+    "buccal",
+    "buccal facial massage",
+    "facial"
+   ]
+  }
+ ],
+ "enhancements": [
+  "Aromatherapy + $20",
+  "Hot Stone + 10 min \u00b7 + $20",
+  "Foot Therapy + 10 min \u00b7 + $20",
+  "Scalp Therapy + 10 min \u00b7 + $20"
+ ],
+ "beauty": [
+  {
+   "name": "Brows",
+   "desc": "Microblading, hybrid, powder and nano brows, shaped and colour-matched to your face. Free consultation.",
+   "note": "Free consultation.",
+   "keys": [
+    "brow",
+    "brows"
+   ]
+  },
+  {
+   "name": "Lip Blushing",
+   "desc": "Soft, semi-permanent colour that enhances your natural lip tone and shape.",
+   "note": "Free consultation.",
+   "keys": [
+    "lip",
+    "lip blushing"
+   ]
+  },
+  {
+   "name": "Eyelash Enhancement",
+   "desc": "A fine line along the lash line for fuller-looking lashes, every day.",
+   "note": "Free consultation.",
+   "keys": [
+    "eyelash enhancement",
+    "lash"
+   ]
+  },
+  {
+   "name": "Facials",
+   "desc": "Deep cleansing, microdermabrasion and enzyme peel facials for fresh, glowing skin.",
+   "note": "",
+   "keys": [
+    "facial",
+    "facials"
+   ]
+  },
+  {
+   "name": "Lash Services",
+   "desc": "Lash treatments for a soft, wide-awake look without daily mascara.",
+   "note": "",
+   "keys": [
+    "lash",
+    "lash services"
+   ]
+  },
+  {
+   "name": "Waxing",
+   "desc": "Full body waxing with soft and hard wax, chosen for each area.",
+   "note": "",
+   "keys": [
+    "wax",
+    "waxing"
+   ]
+  },
+  {
+   "name": "Manicure & Pedicure",
+   "desc": "Shaping, cuticle care and polish for hands and feet.",
+   "note": "",
+   "keys": [
+    "manicure",
+    "manicure & pedicure",
+    "pedicure"
+   ]
+  },
+  {
+   "name": "Microblading",
+   "desc": "Individual hair strokes created by hand for the most natural look.",
+   "note": "Free consultation.",
+   "keys": [
+    "brow",
+    "microblad",
+    "microblading"
+   ]
+  },
+  {
+   "name": "Hybrid Brows",
+   "desc": "Hair strokes at the front with soft shading through the tail.",
+   "note": "Free consultation.",
+   "keys": [
+    "brow",
+    "hybrid brows"
+   ]
+  },
+  {
+   "name": "Powder Brows",
+   "desc": "A full, soft-shaded look, like brow powder that lasts.",
+   "note": "Free consultation.",
+   "keys": [
+    "brow",
+    "powder brows"
+   ]
+  },
+  {
+   "name": "Nano Brows",
+   "desc": "Ultra-fine hair strokes created with a digital machine.",
+   "note": "Free consultation.",
+   "keys": [
+    "brow",
+    "nano brows"
+   ]
+  }
+ ]
+}
