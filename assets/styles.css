@@ -455,5 +455,3 @@ body.chat-open .chat-fab{display:none}
 @keyframes err-breathe{50%{box-shadow:0 0 0 10px rgba(232,204,134,.08),0 0 40px rgba(232,204,134,.25)}}
 @media (prefers-reduced-motion:reduce){.err-code span{animation:none}}
 
-/* blazer portrait: soften the straight shoulder edges of the photo */
-.cutout img{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%)}
