@@ -13,10 +13,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=2">
+<script>try{if(sessionStorage.getItem("rishya-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("no-intro");else document.documentElement.classList.add("intro-on")}catch(e){document.documentElement.classList.add("no-intro")}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HealthAndBeautyBusiness", "name": "Rishya Beauty Lounge", "alternateName": "Looks Beauty Salon", "url": "https://looksbeautysalon.ca/", "telephone": "+17783927296", "email": "looksbeautysalon.ca@gmail.com", "image": "https://looksbeautysalon.ca/assets/img/logo.png", "priceRange": "$$", "address": {"@type": "PostalAddress", "streetAddress": "58 Saddlecreek Crescent NE", "addressLocality": "Calgary", "addressRegion": "AB", "postalCode": "T3J 4R9", "addressCountry": "CA"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:00", "closes": "17:00"}], "areaServed": ["Calgary", "Airdrie", "Balzac", "Chestermere"], "sameAs": ["https://www.instagram.com/looksbeautysalon.ca/"]}</script>
 </head>
 <body>
+<div class="intro" aria-hidden="true">
+  <span class="intro-panel ip-top"></span><span class="intro-panel ip-bot"></span>
+  <div class="intro-inner">
+    <span class="intro-glow"></span>
+    <img class="intro-logo" src="assets/img/logo.png" alt="" width="120" height="120">
+    <p class="intro-word"><span style="--i:0">R</span><span style="--i:1">i</span><span style="--i:2">s</span><span style="--i:3">h</span><span style="--i:4">y</span><span style="--i:5">a</span></p>
+    <span class="intro-line"></span>
+    <p class="intro-tag">Beauty Lounge</p>
+  </div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap nav">
@@ -96,6 +107,12 @@
 <script>
 const b=document.querySelector('.menu-btn'),n=document.getElementById('nav-links');
 b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);});
+(()=>{const d=document.documentElement,x=document.querySelector('.intro');if(!x)return;
+if(!d.classList.contains('intro-on')){x.remove();return}
+try{sessionStorage.setItem('rishya-intro','1')}catch(e){}
+const done=()=>{d.classList.remove('intro-on');x.remove()};
+x.addEventListener('click',()=>{x.classList.add('skip-now');setTimeout(done,650)});
+setTimeout(done,3600);})();
 </script>
 </body>
 </html>
