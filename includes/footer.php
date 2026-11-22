@@ -21,6 +21,12 @@
 <script>
 const b=document.querySelector('.menu-btn'),n=document.getElementById('nav-links');
 b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);});
+(()=>{const d=document.documentElement,x=document.querySelector('.intro');if(!x)return;
+if(!d.classList.contains('intro-on')){x.remove();return}
+try{sessionStorage.setItem('rishya-intro','1')}catch(e){}
+const done=()=>{d.classList.remove('intro-on');x.remove()};
+x.addEventListener('click',()=>{x.classList.add('skip-now');setTimeout(done,650)});
+setTimeout(done,3600);})();
 </script>
 </body>
 </html>

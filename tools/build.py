@@ -116,10 +116,21 @@ def page(title, desc, body, current):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=2">
+<script>try{{if(sessionStorage.getItem("rishya-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("no-intro");else document.documentElement.classList.add("intro-on")}}catch(e){{document.documentElement.classList.add("no-intro")}}</script>
 <script type="application/ld+json">{json.dumps(SCHEMA)}</script>
 </head>
 <body>
+<div class="intro" aria-hidden="true">
+  <span class="intro-panel ip-top"></span><span class="intro-panel ip-bot"></span>
+  <div class="intro-inner">
+    <span class="intro-glow"></span>
+    <img class="intro-logo" src="assets/img/logo.png" alt="" width="120" height="120">
+    <p class="intro-word">{"".join(f'<span style="--i:{n}">{c}</span>' for n,c in enumerate("Rishya"))}</p>
+    <span class="intro-line"></span>
+    <p class="intro-tag">Beauty Lounge</p>
+  </div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap nav">
@@ -158,6 +169,12 @@ def page(title, desc, body, current):
 <script>
 const b=document.querySelector('.menu-btn'),n=document.getElementById('nav-links');
 b.addEventListener('click',()=>{{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);}});
+(()=>{{const d=document.documentElement,x=document.querySelector('.intro');if(!x)return;
+if(!d.classList.contains('intro-on')){{x.remove();return}}
+try{{sessionStorage.setItem('rishya-intro','1')}}catch(e){{}}
+const done=()=>{{d.classList.remove('intro-on');x.remove()}};
+x.addEventListener('click',()=>{{x.classList.add('skip-now');setTimeout(done,650)}});
+setTimeout(done,3600);}})();
 </script>
 </body>
 </html>
