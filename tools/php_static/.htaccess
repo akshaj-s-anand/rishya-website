@@ -1,0 +1,12 @@
+# Apache: friendly error pages and no folder listings.
+# If the site lives in a sub-folder, change "/404.php" to "/sub-folder/404.php" etc.
+Options -Indexes
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+ErrorDocument 503 /503.php
+
+# Keep private files private
+<FilesMatch "^(\.gitignore|README\.md|.*\.bak)$">
+  Require all denied
+</FilesMatch>

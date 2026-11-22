@@ -99,12 +99,12 @@ SCHEMA = {
 CUR = ' aria-current="page"'
 WA_LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.02 3 3.3 8.7 3.3 15.72c0 2.24.59 4.43 1.7 6.36L3.2 28.8l6.9-1.8a12.7 12.7 0 0 0 5.93 1.5h.01c7.02 0 12.74-5.7 12.74-12.72C28.78 8.7 23.06 3 16.04 3Zm0 23.35h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-4.1 1.07 1.1-3.99-.25-.41a10.57 10.57 0 0 1-1.62-5.64c0-5.84 4.76-10.6 10.68-10.6 5.84 0 10.6 4.76 10.6 10.6 0 5.85-4.76 10.68-10.6 10.68Zm5.82-7.93c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.45 4.81.76.33 1.36.53 1.82.67.77.24 1.46.21 2.01.13.61-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37Z"/></svg>'
 
-def page(title, desc, body, current):
+def page(title, desc, body, current, head_extra=""):
     links = "".join(f'<a href="{h}"{CUR if h == current else ""}>{t}</a>' for h, t in NAV)
     return f"""<!doctype html>
 <html lang="en-CA">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8">{head_extra}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -116,7 +116,7 @@ def page(title, desc, body, current):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=2">
+<link rel="stylesheet" href="assets/styles.css?v=3">
 <script>try{{if(sessionStorage.getItem("rishya-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("no-intro");else document.documentElement.classList.add("intro-on")}}catch(e){{document.documentElement.classList.add("no-intro")}}</script>
 <script type="application/ld+json">{json.dumps(SCHEMA)}</script>
 </head>
@@ -165,7 +165,7 @@ def page(title, desc, body, current):
 </footer>
 <a class="wa-float" href="{wa("Hi! I'd like to book an appointment.")}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">{WA_LOGO}<span>Chat with us</span></a>
 <script src="assets/kb.js?v=1" defer></script>
-<script src="assets/chat.js?v=1" defer></script>
+<script src="assets/chat.js?v=2" defer></script>
 <script>
 const b=document.querySelector('.menu-btn'),n=document.getElementById('nav-links');
 b.addEventListener('click',()=>{{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);}});
@@ -428,7 +428,29 @@ for x in KBD["beauty"]:
     if x["name"] in ("Brows","Microblading","Hybrid Brows","Powder Brows","Nano Brows"): x["keys"] = sorted(set(x["keys"]+["brow"]))
 (OUT / "assets" / "kb.json").write_text(json.dumps(KBD, indent=1), encoding="utf-8")
 (OUT / "assets" / "kb.js").write_text("window.RISHYA_KB=" + json.dumps(KBD) + ";", encoding="utf-8")
-print("built", [p[0] for p in PAGES])
+# ---------- error pages ----------
+ERRORS = {
+ 404: ("Page not found", "This page has drifted away", "The page you're looking for doesn't exist or has moved. Let's get you back somewhere relaxing."),
+ 403: ("Access denied", "This room is private", "You don't have permission to view this page. Everything you need is just a click away."),
+ 500: ("Something went wrong", "A little hiccup on our side", "Our website had a problem loading this page. Please try again in a moment, or message us and we'll help right away."),
+ 503: ("Taking a short break", "Back in a moment", "We're doing a little maintenance. Please check back shortly, or message us on WhatsApp in the meantime."),
+}
+def error_body(code):
+    t, script, msg = ERRORS[code]
+    return f"""<section class="plum err">
+  <div class="wrap">
+    <span class="script">{script}</span>
+    <p class="err-code" aria-hidden="true">{str(code)[0]}<span>{I['lotus']}</span>{str(code)[2]}</p>
+    <h1>{t}</h1>{orn()}
+    <p class="lead">{msg}</p>
+    <div class="actions"><a class="btn btn-gold" href="index.html">Back to home</a><a class="btn btn-line" href="{wa(f"Hi! I hit an error ({code}) on your website.")}" target="_blank" rel="noopener">{I['wa']}Message us</a></div>
+    <nav class="err-links" aria-label="Popular pages"><a href="massage.html">Massage menu {I['arrow']}</a><a href="beauty.html">Beauty &amp; PMU {I['arrow']}</a><a href="contact.html">Visit &amp; book {I['arrow']}</a></nav>
+  </div>
+</section>"""
+ERR_HEAD = '\n<meta name="robots" content="noindex">'
+# GitHub Pages serves 404.html for any missing path; <base> keeps assets working in sub-folders
+(OUT / "404.html").write_text(page("Page not found | Rishya Beauty Lounge", ERRORS[404][2], error_body(404), "", ERR_HEAD + '\n<base href="/rishya-website/">'), encoding="utf-8")
+print("built", [p[0] for p in PAGES] + ["404.html"])
 
 # ======================= PHP build (2nd arg = output dir) =======================
 if len(sys.argv) > 2:
@@ -450,6 +472,7 @@ if len(sys.argv) > 2:
         hp = to_php_links(f'href="{h}"')
         head = head.replace(f'<a {hp}>{t}</a>', f'<a {hp}<?= nav_cur("{hp[6:-1]}") ?>>{t}</a>')
     head = head.replace(T, "<?= h($page_title) ?>").replace(D, "<?= h($page_desc) ?>")
+    head = head.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<?php if (!empty($page_base)): ?><meta name="robots" content="noindex">\n<base href="<?= h($page_base) ?>">\n<?php endif; ?>', 1)
     foot = to_php_links(foot).replace('<script src="assets/kb.js?v=1" defer></script>', '<script>window.RISHYA_CHAT_ENDPOINT = "api/ask.php";</script>')
     (PHP / "includes" / "header.php").write_text("<?php /* Shared header. Expects $page_title, $page_desc, $current. */ ?>\n" + head, encoding="utf-8")
     (PHP / "includes" / "footer.php").write_text(foot, encoding="utf-8")
@@ -459,6 +482,15 @@ if len(sys.argv) > 2:
             "<?php\nrequire __DIR__ . '/includes/bootstrap.php';\n"
             f"$page_title = {json.dumps(t)};\n$page_desc = {json.dumps(d)};\n$current = '{pf}';\n"
             "require __DIR__ . '/includes/header.php';\n?>\n" + to_php_links(b) + "\n<?php require __DIR__ . '/includes/footer.php'; ?>\n", encoding="utf-8")
+    # error pages (Apache: see .htaccess ErrorDocument; nginx: error_page)
+    for code in ERRORS:
+        (PHP / f"{code}.php").write_text(
+            "<?php\nrequire __DIR__ . '/includes/bootstrap.php';\n"
+            f"http_response_code({code});\n"
+            + ("header('Retry-After: 3600');\n" if code == 503 else "")
+            + f"$page_title = {json.dumps(ERRORS[code][0] + ' | Rishya Beauty Lounge')};\n$page_desc = {json.dumps(ERRORS[code][2])};\n$current = '';\n"
+            "$page_base = rtrim(str_replace('\\\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/') . '/';\n"
+            "require __DIR__ . '/includes/header.php';\n?>\n" + to_php_links(error_body(code)) + "\n<?php require __DIR__ . '/includes/footer.php'; ?>\n", encoding="utf-8")
     # knowledge text for the AI
     L = ["RISHYA BEAUTY LOUNGE - WEBSITE CONTENT (the only source of truth)", "",
          "Business: Rishya Beauty Lounge (also known as Looks Beauty Salon). Private studio in NE Calgary. Massage therapy / stretch lab, permanent makeup (PMU) and esthetics. By appointment only.",
