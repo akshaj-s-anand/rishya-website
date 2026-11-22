@@ -13,6 +13,14 @@
 
   const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  /* turn URLs and the phone number in an (already escaped) AI reply into tidy links */
+  const linkify = h => h.replace(/(https?:\/\/[^\s<)"]+[^\s<)".,!?;:])|((?:\+?1[\s-]?)?\(?778\)?[\s.-]?392[\s.-]?7296(?!\d))/g, (m, u) => {
+    if (!u) return `<a href="tel:+17783927296">${m}</a>`;
+    const raw = u.replace(/&amp;/g, '&');
+    const label = /google\.[a-z.]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps/.test(raw) ? '📍 Open in Google Maps'
+      : /wa\.me\//.test(raw) ? 'WhatsApp us' : raw.replace(/^https?:\/\/(www\.)?/, '').split('/')[0];
+    return `<a href="${u}" target="_blank" rel="noopener">${label}</a>`;
+  });
 
   const btn = el('button', 'chat-fab', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg><span>Ask us</span>');
   btn.setAttribute('aria-label', 'Ask us a question'); btn.setAttribute('aria-expanded', 'false');
@@ -67,7 +75,7 @@
       if (ENDPOINT) {
         const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: q, history: history.slice(-8) }) });
         if (!r.ok) throw new Error(r.status);
-        reply = esc((await r.json()).reply || '').replace(/\n/g, '<br>');
+        reply = linkify(esc((await r.json()).reply || '')).replace(/\n/g, '<br>');
       } else {
         await new Promise(r => setTimeout(r, 650));
         reply = await demo(q);
@@ -91,7 +99,7 @@
     const b = (KB.beauty || []).find(x => x.keys.some(k => s.includes(k)));
     if (b) return `<b>${b.name}</b>: ${b.desc} ${b.note || ''} Pricing is shared on request, just ${waLink}.`;
     if (has('hour', 'open', 'close', 'time', 'sunday', 'saturday', 'today')) return `We're open ${KB.hours}. Visits are by appointment only, so please ${waLink} first.`;
-    if (has('where', 'address', 'location', 'locat', 'park', 'direction', 'find you')) return `We're at ${KB.address}, serving NE Calgary, Airdrie, Balzac and Chestermere. <a href="contact.html">See the map</a>.`;
+    if (has('where', 'address', 'location', 'locat', 'park', 'direction', 'find you')) return `We're at ${KB.address}, serving NE Calgary, Airdrie, Balzac and Chestermere.<br><a href="${KB.maps}" target="_blank" rel="noopener">📍 Open in Google Maps</a> · <a href="contact.html">See the map</a>`;
     if (has('book', 'appointment', 'availability', 'available', 'slot')) return `The quickest way is to ${waLink}, or call ${KB.phone}. We'll reply with open times.`;
     if (has('back pain', 'pain', 'sore', 'tight', 'stiff', 'knot', 'neck', 'shoulder')) return `For tight or sore muscles, clients often choose <b>Relaxation Deep Tissue</b> (60 min $110 / 90 min $160) or our <b>Therapeutic Massage</b> (90 min $170, includes cupping, trigger points and hot stone). For neck and shoulders there's also <b>Head, Neck, Shoulder & Foot</b> (60 min $100). This isn't medical advice, so tell us how you feel when you ${waLink}.`;
     if (has('price', 'cost', 'how much', 'rate', 'menu', '$')) return 'Our massages start at $100:<br>' + KB.massages.map(x => `• ${x.name}: ${x.prices.join(' / ')}`).join('<br>') + `<br><a href="massage.html">See the full menu</a>.`;
