@@ -60,26 +60,35 @@ $contents[] = ['role' => 'user', 'parts' => [['text' => $msg]]];
 $payload = [
     'system_instruction' => ['parts' => [['text' => $system]]],
     'contents' => $contents,
-    'generationConfig' => ['temperature' => 0.3, 'maxOutputTokens' => 400],
+    'generationConfig' => ['temperature' => 0.3, 'maxOutputTokens' => 1024],
 ];
-$url = 'https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode(GEMINI_MODEL) . ':generateContent';
-$ch = curl_init($url);
-curl_setopt_array($ch, [
-    CURLOPT_POST => true,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT => 20,
-    CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'x-goog-api-key: ' . GEMINI_API_KEY],
-    CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
-]);
-$res  = curl_exec($ch);
-$code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-$data  = json_decode((string)$res, true);
+// Try the configured model first; if Google is busy (429/5xx/timeout), fall back to lighter models.
+$models = array_values(array_unique(array_filter([GEMINI_MODEL, 'gemini-flash-lite-latest', 'gemini-2.5-flash'])));
 $reply = '';
-foreach ($data['candidates'][0]['content']['parts'] ?? [] as $p) $reply .= $p['text'] ?? '';
-if ($code !== 200 || trim($reply) === '') {
-    error_log('Rishya chat: Gemini HTTP ' . $code . ' ' . substr((string)$res, 0, 300));
-    out(502, $fallback);
+foreach ($models as $model) {
+    $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent';
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT => 12,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'x-goog-api-key: ' . GEMINI_API_KEY],
+        CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
+    ]);
+    $res  = curl_exec($ch);
+    $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $cerr = curl_error($ch);
+    curl_close($ch);
+
+    $data = json_decode((string)$res, true);
+    foreach ($data['candidates'][0]['content']['parts'] ?? [] as $p) {
+        if (empty($p['thought'])) $reply .= $p['text'] ?? '';
+    }
+    if ($code === 200 && trim($reply) !== '') break;
+    error_log('Rishya chat: ' . $model . ' HTTP ' . $code . ' ' . $cerr . ' ' . substr((string)$res, 0, 300));
+    $reply = '';
+    if ($code !== 0 && $code !== 429 && $code < 500) break; // bad key/request: other models won't help
 }
+if (trim($reply) === '') out(502, $fallback);
 out(200, trim($reply));
