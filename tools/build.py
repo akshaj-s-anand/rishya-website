@@ -320,7 +320,7 @@ home = f"""<section class="hero">
       {actions("Text to book")}
     </div>
     <div class="hero-right">
-      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-blazer-cutout.webp?v=2" alt="Your therapist at Rishya Beauty Lounge" width="760" height="1201" fetchpriority="high"></figure>
+      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-blazer-cutout.webp?v=3" alt="Your therapist at Rishya Beauty Lounge" width="760" height="1201" fetchpriority="high"></figure>
     </div>
   </div>
 </section>
