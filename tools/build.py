@@ -7,6 +7,7 @@ OUT = Path(sys.argv[1])
 PHONE_DISPLAY = "778-392-7296"
 PHONE_E164 = "+17783927296"
 WA = "https://wa.me/17783927296"
+MAPS = "https://www.google.com/maps/search/?api=1&query=58+Saddlecreek+Crescent+NE+Calgary+AB+T3J+4R9"
 
 def wa(text="Hi! I'd like to book an appointment."):
     return f"{WA}?text={urllib.parse.quote(text)}"
@@ -165,7 +166,7 @@ def page(title, desc, body, current, head_extra=""):
 </footer>
 <a class="wa-float" href="{wa("Hi! I'd like to book an appointment.")}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">{WA_LOGO}<span>Chat with us</span></a>
 <script src="assets/kb.js?v=1" defer></script>
-<script src="assets/chat.js?v=2" defer></script>
+<script src="assets/chat.js?v=3" defer></script>
 <script>
 const b=document.querySelector('.menu-btn'),n=document.getElementById('nav-links');
 b.addEventListener('click',()=>{{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);}});
@@ -418,7 +419,7 @@ def keys(n):
         if w in n: k.add(w)
     return sorted(k)
 KBD = {
- "phone": PHONE_DISPLAY, "address": "58 Saddlecreek Crescent NE, Calgary, AB T3J 4R9",
+ "phone": PHONE_DISPLAY, "maps": MAPS, "address": "58 Saddlecreek Crescent NE, Calgary, AB T3J 4R9",
  "hours": "Monday to Friday 9:00 to 18:00 and Saturday 11:00 to 17:00 (closed Sunday)",
  "massages": [{"name": t, "prices": [f"{m} {p}" for m, p in pr], "desc": d, "keys": keys(t) + (["jaw"] if "TMJ" in t else []) + (["pregnan"] if "Prenatal" in t else [])} for t, pr, d, _ in MASSAGE_MENU],
  "enhancements": [f"{t} {p}" for t, p, _ in ENHANCE],
@@ -495,6 +496,8 @@ if len(sys.argv) > 2:
     L = ["RISHYA BEAUTY LOUNGE - WEBSITE CONTENT (the only source of truth)", "",
          "Business: Rishya Beauty Lounge (also known as Looks Beauty Salon). Private studio in NE Calgary. Massage therapy / stretch lab, permanent makeup (PMU) and esthetics. By appointment only.",
          f"Address: {KBD['address']}. Serves Saddle Ridge, NE Calgary, Airdrie, Balzac and Chestermere.",
+         f"Google Maps location / directions link: {MAPS}",
+         "Website pages: Massage menu = massage.php, Beauty & PMU = beauty.php, Visit & book (map, hours, FAQ) = contact.php.",
          f"Hours: {KBD['hours']}.",
          f"Booking: WhatsApp or text {PHONE_DISPLAY} ({WA}), or call {PHONE_DISPLAY}. Instagram @looksbeautysalon.ca. Email looksbeautysalon.ca@gmail.com.",
          "", "MASSAGE MENU AND PRICES (CAD):"]

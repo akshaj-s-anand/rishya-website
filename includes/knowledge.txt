@@ -2,6 +2,8 @@ RISHYA BEAUTY LOUNGE - WEBSITE CONTENT (the only source of truth)
 
 Business: Rishya Beauty Lounge (also known as Looks Beauty Salon). Private studio in NE Calgary. Massage therapy / stretch lab, permanent makeup (PMU) and esthetics. By appointment only.
 Address: 58 Saddlecreek Crescent NE, Calgary, AB T3J 4R9. Serves Saddle Ridge, NE Calgary, Airdrie, Balzac and Chestermere.
+Google Maps location / directions link: https://www.google.com/maps/search/?api=1&query=58+Saddlecreek+Crescent+NE+Calgary+AB+T3J+4R9
+Website pages: Massage menu = massage.php, Beauty & PMU = beauty.php, Visit & book (map, hours, FAQ) = contact.php.
 Hours: Monday to Friday 9:00 to 18:00 and Saturday 11:00 to 17:00 (closed Sunday).
 Booking: WhatsApp or text 778-392-7296 (https://wa.me/17783927296), or call 778-392-7296. Instagram @looksbeautysalon.ca. Email looksbeautysalon.ca@gmail.com.
 
