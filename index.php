@@ -18,7 +18,7 @@ require __DIR__ . '/includes/header.php';
 </div>
     </div>
     <div class="hero-right">
-      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-blazer-cutout.webp?v=3" alt="Your therapist at Rishya Beauty Lounge" width="760" height="1201" fetchpriority="high"></figure>
+      <figure class="cutout"><span class="halo" aria-hidden="true"></span><img src="assets/img/rishi-blazer-cutout.webp?v=4" alt="Your therapist at Rishya Beauty Lounge" width="760" height="1072" fetchpriority="high"></figure>
     </div>
   </div>
 </section>

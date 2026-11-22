@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=5">
+<link rel="stylesheet" href="assets/styles.css?v=6">
 <script>try{if(sessionStorage.getItem("rishya-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("no-intro");else document.documentElement.classList.add("intro-on")}catch(e){document.documentElement.classList.add("no-intro")}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HealthAndBeautyBusiness", "name": "Rishya Beauty Lounge", "alternateName": "Looks Beauty Salon", "url": "https://looksbeautysalon.ca/", "telephone": "+17783927296", "email": "looksbeautysalon.ca@gmail.com", "image": "https://looksbeautysalon.ca/assets/img/logo.png", "priceRange": "$$", "address": {"@type": "PostalAddress", "streetAddress": "58 Saddlecreek Crescent NE", "addressLocality": "Calgary", "addressRegion": "AB", "postalCode": "T3J 4R9", "addressCountry": "CA"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:00", "closes": "17:00"}], "areaServed": ["Calgary", "Airdrie", "Balzac", "Chestermere"], "sameAs": ["https://www.instagram.com/looksbeautysalon.ca/"]}</script>
 </head>
