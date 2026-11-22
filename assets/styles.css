@@ -431,3 +431,26 @@ body.chat-open .chat-fab{display:none}
 .intro-on .cutout{opacity:0;transform:translateX(30px);animation:intro-rise 1s cubic-bezier(.2,.8,.2,1) 2.6s forwards}
 @keyframes intro-rise{to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.intro{display:none!important}}
+
+/* ---------- chat: new-chat button ---------- */
+.chat-new{margin-left:auto;background:none;border:0;color:var(--gold-100);cursor:pointer;padding:6px;display:grid;place-items:center;border-radius:50%;opacity:.8}
+.chat-new:hover{opacity:1;background:rgba(255,255,255,.08)}
+.chat-new svg{width:18px;height:18px}
+.chat-new + .chat-x{margin-left:0}
+
+/* ---------- error pages ---------- */
+.err{min-height:calc(100vh - 90px);display:grid;place-items:center;text-align:center;padding:64px 0 96px}
+.err .wrap{display:grid;justify-items:center;gap:14px;max-width:640px}
+.err-code{margin:0;display:flex;align-items:center;gap:.08em;font-family:var(--display);font-weight:600;font-size:clamp(5.5rem,22vw,10rem);line-height:.9;
+  background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.err-code span{display:grid;place-items:center;width:.82em;height:.82em;border-radius:50%;border:2px solid var(--gold-300);color:var(--gold-300);
+  -webkit-text-fill-color:initial;animation:err-breathe 4s ease-in-out infinite}
+.err-code span svg{width:52%;height:52%}
+.err h1{color:var(--peach-50)}
+.err .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:6px}
+.err-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(232,204,134,.25)}
+.err-links a{display:inline-flex;align-items:center;gap:6px;color:var(--gold-100);text-decoration:none;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase}
+.err-links a:hover{color:var(--gold-300)}
+.err-links svg{width:16px;height:16px}
+@keyframes err-breathe{50%{box-shadow:0 0 0 10px rgba(232,204,134,.08),0 0 40px rgba(232,204,134,.25)}}
+@media (prefers-reduced-motion:reduce){.err-code span{animation:none}}

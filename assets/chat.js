@@ -5,6 +5,11 @@
   const ENDPOINT = window.RISHYA_CHAT_ENDPOINT || null;
   const WA = document.querySelector('.wa-float')?.href || '#';
   let KB = null, history = [], busy = false;
+  /* Chat is remembered in this browser for 30 days after the last message. */
+  const STORE = 'rishya-chat-v1', TTL = 30 * 24 * 3600 * 1000;
+  const load = () => { try { const d = JSON.parse(localStorage.getItem(STORE) || 'null'); if (d && Date.now() - d.t < TTL) return d; localStorage.removeItem(STORE); } catch (e) {} return null; };
+  const save = () => { try { localStorage.setItem(STORE, JSON.stringify({ t: Date.now(), msgs: [...log.children].filter(m => !m.classList.contains('typing')).map(m => ({ w: m.classList.contains('me') ? 'me' : 'bot', h: m.innerHTML })), history: history.slice(-16) })); } catch (e) {} };
+  const sess = (k, v) => { try { return v === undefined ? sessionStorage.getItem(k) : sessionStorage.setItem(k, v); } catch (e) { return null; } };
 
   const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -18,6 +23,7 @@
     <header class="chat-head">
       <img src="assets/img/logo.png" alt="" width="40" height="40">
       <div><b>Ask Rishya</b><small>Usually answers instantly</small></div>
+      <button class="chat-new" aria-label="Start a new chat" title="New chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
       <button class="chat-x" aria-label="Close chat">×</button>
     </header>
     <div class="chat-log" role="log" aria-live="polite"></div>
@@ -33,11 +39,20 @@
   const add = (who, html) => { const m = el('div', 'msg ' + who, html); log.append(m); log.scrollTop = log.scrollHeight; return m; };
   const CHIPS = ['Massage prices', 'Opening hours', 'Where are you?', 'Permanent makeup', 'Which massage for back pain?'];
   CHIPS.forEach(c => { const b = el('button', 'chip', c); b.type = 'button'; b.onclick = () => ask(c); chips.append(b); });
+  const GREET = "Hi! 👋 I can answer questions about our massages, beauty services, prices and hours. What would you like to know?";
+  const saved = load();
+  if (saved && saved.msgs && saved.msgs.length) {
+    saved.msgs.forEach(m => add(m.w, m.h)); history = saved.history || [];
+    if (saved.msgs.some(m => m.w === 'me')) chips.hidden = true;
+  }
 
   function open(v) {
-    panel.hidden = !v; btn.setAttribute('aria-expanded', v); document.body.classList.toggle('chat-open', v);
-    if (v) { if (!log.children.length) add('bot', "Hi! 👋 I can answer questions about our massages, beauty services, prices and hours. What would you like to know?"); setTimeout(() => input.focus(), 50); }
+    panel.hidden = !v; btn.setAttribute('aria-expanded', v); document.body.classList.toggle('chat-open', v); sess('rishya-chat-open', v ? '1' : '');
+    if (v) { if (!log.children.length) { add('bot', GREET); save(); } log.scrollTop = log.scrollHeight; if (!matchMedia('(max-width:600px)').matches) setTimeout(() => input.focus(), 50); }
   }
+  panel.querySelector('.chat-new').onclick = () => { log.innerHTML = ''; history = []; chips.hidden = false; try { localStorage.removeItem(STORE); } catch (e) {} add('bot', GREET); save(); input.focus(); };
+  /* keep the chat open when moving between pages */
+  if (sess('rishya-chat-open') === '1') open(true);
   btn.onclick = () => open(panel.hidden);
   panel.querySelector('.chat-x').onclick = () => open(false);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) open(false); });
@@ -62,6 +77,7 @@
     }
     t.className = 'msg bot'; t.innerHTML = reply; log.scrollTop = log.scrollHeight;
     history.push({ role: 'user', text: q }, { role: 'assistant', text: t.textContent });
+    save();
     busy = false;
   }
 
