@@ -455,3 +455,16 @@ body.chat-open .chat-fab{display:none}
 @keyframes err-breathe{50%{box-shadow:0 0 0 10px rgba(232,204,134,.08),0 0 40px rgba(232,204,134,.25)}}
 @media (prefers-reduced-motion:reduce){.err-code span{animation:none}}
 
+
+/* ---------- hero aura: gentle breathing glow + slow shimmering ring ---------- */
+.cutout .halo{animation:aura-breathe 6s ease-in-out infinite}
+.cutout .halo::before{content:"";position:absolute;inset:-1.5px;border-radius:50%;padding:1.5px;
+  background:conic-gradient(from 0deg,transparent 0 62%,rgba(246,227,176,.95) 72%,rgba(232,204,134,.2) 80%,transparent 86%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:aura-spin 9s linear infinite}
+.cutout .halo::after{content:"";position:absolute;inset:-14%;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,204,134,.22) 0%,rgba(232,204,134,0) 62%);opacity:.5;animation:aura-glow 6s ease-in-out infinite}
+@keyframes aura-breathe{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.025)}}
+@keyframes aura-spin{to{transform:rotate(360deg)}}
+@keyframes aura-glow{0%,100%{opacity:.35}50%{opacity:.9}}
+@media (prefers-reduced-motion:reduce){.cutout .halo,.cutout .halo::before,.cutout .halo::after{animation:none}}
