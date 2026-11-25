@@ -29,7 +29,7 @@
   panel.setAttribute('aria-label', 'Ask Rishya'); panel.hidden = true;
   panel.innerHTML = `
     <header class="chat-head">
-      <img src="assets/img/logo.png" alt="" width="40" height="40">
+      <img src="assets/img/logo-emblem.png" alt="" width="40" height="40" style="object-fit:contain;background:#fff;padding:5px">
       <div><b>Ask Rishya</b><small>Usually answers instantly</small></div>
       <button class="chat-new" aria-label="Start a new chat" title="New chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
       <button class="chat-x" aria-label="Close chat">×</button>

@@ -5,7 +5,7 @@ Shared header/footer + page bodies live here so every page stays in sync."""
 import json, os, html as H
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V = "3"  # cache-bust for css/js
+V = "4"  # cache-bust for css/js
 PHONE = "778-392-7296"
 TEL = "+17783927296"
 WA = "https://wa.me/17783927296?text=Hi%21%20I%27d%20like%20to%20book%20an%20appointment."
@@ -54,9 +54,9 @@ MASSAGES = [
 ENH = [("Aromatherapy","+ $20","m-aroma.jpg"),("Hot Stone","+ 10 min · $20","m-hotstone.jpg"),("Foot Therapy","+ 10 min · $20","m-foot.jpg"),("Scalp Therapy","+ 10 min · $20","m-neck.jpg")]
 BROWS = [
  ("Microblading","Individual hair strokes created by hand for the most natural look.","micro.jpg"),
- ("Hybrid Brows","Hair strokes at the front with soft shading through the tail.","ai-hybrid-brows.jpg"),
+ ("Hybrid Brows","Hair strokes at the front with soft shading through the tail.","v3-hybrid-brows.jpg"),
  ("Powder Brows","A full, soft-shaded look, like brow powder that lasts.","powder.jpg"),
- ("Nano Brows","Ultra-fine hair strokes created with a digital machine.","ai-nano-brows.jpg"),
+ ("Nano Brows","Ultra-fine hair strokes created with a digital machine.","v3-nano-brows.jpg"),
 ]
 BEAUTY = [
  ("Permanent makeup","Lip Blushing","Soft, semi-permanent colour that enhances your natural lip tone and shape.",["Lip blush","Colour correction"],"lip.jpg"),
@@ -94,8 +94,8 @@ def head(title, desc, current, extra_head=""):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<meta name="theme-color" content="#26082A">
-<link rel="icon" href="assets/img/favicon.png">
+<meta name="theme-color" content="#F9EEE1">
+<link rel="icon" href="assets/img/favicon-gold.png">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="assets/img/v3-hero-room.jpg">
@@ -112,14 +112,14 @@ def head(title, desc, current, extra_head=""):
 <div class="topbar">By appointment only <span class="hide-sm">· Massage · Permanent makeup · Esthetics</span> · Text <a href="{WA}" target="_blank" rel="noopener">{PHONE}</a></div>
 <header class="hdr">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Rishya Beauty Lounge home"><img src="assets/img/logo.png" alt="" width="50" height="50"><span><b>Rishya</b><small>Beauty Lounge</small></span></a>
+    <a class="brand" href="index.html" aria-label="Rishya Beauty Lounge home"><img src="assets/img/logo-emblem.png" alt="" height="52"><span><b>Rishya</b><small>Beauty Lounge</small></span></a>
     <nav class="nav" aria-label="Main">{nav}</nav>
     <a class="btn btn-plum" href="{WA}" target="_blank" rel="noopener">Book now</a>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">{ICON["menu"]}</button>
   </div>
 </header>
 <div class="drawer" id="drawer" aria-hidden="true">
-  <div class="drawer-top"><img src="assets/img/logo.png" alt="Rishya Beauty Lounge"><button class="drawer-x" aria-label="Close menu">&times;</button></div>
+  <div class="drawer-top"><img src="assets/img/logo-gold.png" alt="Rishya Beauty Lounge"><button class="drawer-x" aria-label="Close menu">&times;</button></div>
   <nav aria-label="Mobile">{dnav}</nav>
   <div class="actions"><a class="btn btn-gold" href="{WA}" target="_blank" rel="noopener">{ICON["wa"]} Text to book</a><a class="btn btn-ghost" href="tel:{TEL}">{ICON["phone"]} Call</a></div>
 </div>
@@ -138,7 +138,7 @@ def foot():
   <div class="wrap">
     <div class="ftr-grid">
       <div style="display:grid;gap:18px;align-content:start">
-        <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="50" height="50"><span><b>Rishya</b><small>Beauty Lounge</small></span></a>
+        <a href="index.html"><img class="flogo" src="assets/img/logo-gold.png" alt="Rishya Beauty Lounge"></a>
         <p>A calm, private studio in NE Calgary for massage therapy, permanent makeup and esthetics. Every appointment is one-on-one.</p>
       </div>
       <div><h4>Explore</h4><ul><li><a href="massage.html">Massage menu</a></li><li><a href="beauty.html">Beauty &amp; PMU</a></li><li><a href="index.html#therapist">About</a></li><li><a href="contact.html">Visit &amp; book</a></li></ul></div>
@@ -371,7 +371,7 @@ def page_beauty():
         tg = "".join(f"<span>{t}</span>" for t in tags)
         cards.append(f'<article class="card rv-in"><div class="img"><img src="assets/img/{img}" alt="{e(name)}" loading="lazy"><span class="tag">{cat}</span></div><div class="body"><h3>{e(name)}</h3><p>{e(desc)}</p></div><div class="foot"><span style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">{" · ".join(tags)}</span><a class="link" href="{wa("Hi! I would like to book " + name + ".")}" target="_blank" rel="noopener">Book {ICON["arrow"]}</a></div></article>')
     b += f'''<section class="phero">
-  {hero_bg("ai-hybrid-brows.jpg", alt="Soft hybrid brows")}
+  {hero_bg("v3-pmu-tools.jpg", alt="Permanent makeup tools in rose gold")}
   <div class="wrap"><div class="hero-copy" style="max-width:640px;display:grid">
     <span class="crumbs rise"><a href="index.html">Home</a> / Beauty &amp; PMU</span>
     <h1 class="rise d1">Beauty &amp; <em>PMU studio</em></h1>
@@ -394,7 +394,7 @@ def page_beauty():
 </section>
 {therapist_block()}
 {reviews_block()}
-{cta_block(title='Wake up <em>beautiful</em>', sub="Free consultation for every permanent makeup service", img="ai-nano-brows.jpg")}
+{cta_block(title='Wake up <em>beautiful</em>', sub="Free consultation for every permanent makeup service", img="v3-hybrid-brows.jpg")}
 {visit_block()}
 '''
     return b + foot()
