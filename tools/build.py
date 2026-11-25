@@ -5,7 +5,7 @@ Shared header/footer + page bodies live here so every page stays in sync."""
 import json, os, html as H
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V = "4"  # cache-bust for css/js
+V = "5"  # cache-bust for css/js
 PHONE = "778-392-7296"
 TEL = "+17783927296"
 WA = "https://wa.me/17783927296?text=Hi%21%20I%27d%20like%20to%20book%20an%20appointment."
@@ -79,7 +79,7 @@ FAQ = [
  ("Can I get a receipt for my insurance?","Yes, a receipt is available after every massage, and we can tell you about direct billing for your plan."),
  ("How do I cancel or reschedule?","Text us as early as you can and we will find you a new time."),
 ]
-NAV = [("index.html","Home"),("massage.html","Massage"),("beauty.html","Beauty & PMU"),("index.html#therapist","About"),("contact.html","Visit")]
+NAV = [("index.html","Home"),("beauty.html","Brows & PMU"),("massage.html","Massage"),("index.html#therapist","About"),("contact.html","Visit")]
 e = H.escape
 
 LD = {"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Rishya Beauty Lounge","alternateName":"Looks Beauty Salon","url":"https://looksbeautysalon.ca/","telephone":TEL,"email":EMAIL,"image":"https://looksbeautysalon.ca/assets/img/logo.png","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"58 Saddlecreek Crescent NE","addressLocality":"Calgary","addressRegion":"AB","postalCode":"T3J 4R9","addressCountry":"CA"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:00","closes":"17:00"}],"areaServed":["Calgary","Airdrie","Balzac","Chestermere"],"sameAs":[IG]}
@@ -109,7 +109,7 @@ def head(title, desc, current, extra_head=""):
 {extra_head}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="topbar">By appointment only <span class="hide-sm">· Massage · Permanent makeup · Esthetics</span> · Text <a href="{WA}" target="_blank" rel="noopener">{PHONE}</a></div>
+<div class="topbar">Free permanent makeup consultation <span class="hide-sm">· By appointment only</span> · Text <a href="{WA}" target="_blank" rel="noopener">{PHONE}</a></div>
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Rishya Beauty Lounge home"><img src="assets/img/logo-emblem.png" alt="" height="52"><span><b>Rishya</b><small>Beauty Lounge</small></span></a>
@@ -139,7 +139,7 @@ def foot():
     <div class="ftr-grid">
       <div style="display:grid;gap:18px;align-content:start">
         <a href="index.html"><img class="flogo" src="assets/img/logo-gold.png" alt="Rishya Beauty Lounge"></a>
-        <p>A calm, private studio in NE Calgary for massage therapy, permanent makeup and esthetics. Every appointment is one-on-one.</p>
+        <p>A calm, private studio in NE Calgary for permanent makeup, esthetics and massage therapy. Every appointment is one-on-one.</p>
       </div>
       <div><h4>Explore</h4><ul><li><a href="massage.html">Massage menu</a></li><li><a href="beauty.html">Beauty &amp; PMU</a></li><li><a href="index.html#therapist">About</a></li><li><a href="contact.html">Visit &amp; book</a></li></ul></div>
       <div><h4>Hours</h4><ul><li>Mon–Fri · 9:00–18:00</li><li>Sat · 11:00–17:00</li><li>Sun · Closed</li><li>By appointment only</li></ul></div>
@@ -248,9 +248,9 @@ def therapist_block():
     <div class="meet-copy rv-in">
       {kicker("Meet your therapist")}
       <h2>The hands <em>behind Rishya</em></h2>
-      <p class="quote">Whether it is a deep tissue massage or a set of brows, I take time to listen first and tailor every treatment to you.</p>
+      <p class="quote">Whether it is a set of brows or a deep tissue massage, I take time to listen first and tailor every treatment to you.</p>
       <p class="lead">Rishya Beauty Lounge is a calm, private studio in NE Calgary where every appointment is one-on-one, from pain relief and a quiet hour to yourself to brows and lips you can wake up with.</p>
-      <ul class="checks"><li>{ICON["check"]}Registered Massage Therapist, receipts for your insurance</li><li>{ICON["check"]}Permanent makeup, brows, lashes and esthetics</li><li>{ICON["check"]}One client at a time, in a private room</li></ul>
+      <ul class="checks"><li>{ICON["check"]}Permanent makeup: brows, lips and lash line</li><li>{ICON["check"]}Registered Massage Therapist, receipts for your insurance</li><li>{ICON["check"]}One client at a time, in a private room</li></ul>
       <div class="actions"><a class="btn btn-gold" href="{WA}" target="_blank" rel="noopener">{ICON["wa"]} Book with me</a></div>
     </div>
   </div>
@@ -270,45 +270,45 @@ def steps_block():
 
 # ---------- pages ----------
 def page_index():
-    b = head("Rishya Beauty Lounge | Massage Therapy & Permanent Makeup in NE Calgary",
-             "Massage therapy, permanent makeup brows and lips, facials and waxing in a calm, private NE Calgary studio. By appointment only. Text to book 778-392-7296.", "index.html")
+    b = head("Rishya Beauty Lounge | Permanent Makeup, Brows & Lips in NE Calgary",
+             "Microblading, powder and nano brows, lip blushing and lash enhancement in a private NE Calgary studio, plus massage therapy and esthetics. Free PMU consultation. By appointment only. Text to book 778-392-7296.", "index.html")
     b += f'''<section class="hero">
-  {hero_bg("v3-hero-room.jpg","v3-hero-room-m.jpg","Candlelit private massage room at Rishya Beauty Lounge")}
+  {hero_bg("v3-hero-pmu.jpg","v3-hero-pmu-m.jpg","Soft natural permanent makeup brows and lips")}
   <div class="wrap">
     <div class="hero-copy">
-      <span class="kicker rise">Massage · Permanent makeup · Esthetics</span>
-      <h1 class="rise d1">Relax, <em>rejuvenate</em> &amp; heal</h1>
-      <p class="lead rise d2">A calm, private studio in NE Calgary for therapeutic massage, permanent makeup and beauty treatments. One client at a time.</p>
-      <div class="actions rise d3"><a class="btn btn-gold" href="{WA}" target="_blank" rel="noopener">{ICON["wa"]} Text to book</a><a class="btn btn-ghost" href="massage.html">View massage menu</a></div>
+      <span class="kicker rise">Permanent makeup · Brows · Lips · Lashes</span>
+      <h1 class="rise d1">Wake up with <em>perfect brows</em></h1>
+      <p class="lead rise d2">Natural-looking microblading, powder brows and lip blushing in a private NE Calgary studio. Every brow is mapped to your face, starting with a free consultation.</p>
+      <div class="actions rise d3"><a class="btn btn-gold" href="{wa("Hi! I would like to book a free permanent makeup consultation.")}" target="_blank" rel="noopener">{ICON["wa"]} Free consultation</a><a class="btn btn-ghost" href="beauty.html">Explore brows &amp; PMU</a></div>
     </div>
-    <div class="hero-stats rise d4"><div><b>RMT</b><span>Registered therapist</span></div><div><b>10+</b><span>Massage treatments</span></div><div><b>5★</b><span>30 Google reviews</span></div></div>
+    <div class="hero-stats rise d4"><div><b>Free</b><span>PMU consultation</span></div><div><b>4</b><span>Brow techniques</span></div><div><b>5★</b><span>30 Google reviews</span></div></div>
   </div>
 </section>
-{marquee(["Deep tissue","Hot stone","Lymphatic drainage","Prenatal","TMJ","Cupping","Microblading","Lip blushing","Facials","Waxing"])}
+{marquee(["Microblading","Hybrid brows","Powder brows","Nano brows","Lip blushing","Lash enhancement","Facials","Waxing","Massage therapy"])}
 <section>
   <div class="wrap intro-grid">
-    <div class="collage rv-in"><img class="c-main" src="assets/img/m-room.jpg" alt="Treatment room with plum linens and candles" loading="lazy"><img class="c-small" src="assets/img/m-aroma.jpg" alt="Aromatherapy oils and warm candles" loading="lazy"><div class="seal"><div><b>1:1</b>Private<br>sessions</div></div></div>
+    <div class="collage rv-in"><img class="c-main" src="assets/img/v3-hybrid-brows.jpg" alt="Soft hybrid brows" loading="lazy"><img class="c-small" src="assets/img/v3-pmu-tools.jpg" alt="Rose gold permanent makeup tools" loading="lazy"><div class="seal"><div><b>1:1</b>Private<br>sessions</div></div></div>
     <div class="intro-copy rv-in">
       {kicker("Welcome to Rishya")}
-      <h2>Massage &amp; beauty, <em>under one roof</em></h2>
-      <p class="lead">Book a therapeutic massage, refresh your skin, or wake up with perfect brows. Every appointment is private, unhurried and tailored to how you feel today.</p>
-      <div class="pillars"><div><b>Professional</b><span>Registered massage therapy with receipts</span></div><div><b>Personalized</b><span>We listen first, then tailor the session</span></div><div><b>Results driven</b><span>Pain relief and natural-looking beauty</span></div><div><b>Private</b><span>A quiet room, one client at a time</span></div></div>
+      <h2>Brows and lips, <em>made for you</em></h2>
+      <p class="lead">Permanent makeup is our speciality. We map every brow to your features, colour-match it to your skin and only begin once you love the shape. We also offer facials, lashes, waxing and massage therapy.</p>
+      <div class="pillars"><div><b>Free consultation</b><span>For every permanent makeup service</span></div><div><b>Mapped to you</b><span>Shape planned around your features</span></div><div><b>Colour-matched</b><span>Pigment chosen for your skin tone</span></div><div><b>Private</b><span>One-on-one, in a quiet studio</span></div></div>
       <div class="actions" style="margin-top:8px"><a class="link" href="#therapist">Meet your therapist {ICON["arrow"]}</a></div>
     </div>
   </div>
 </section>
-<section class="dark" id="massage">
-  <div class="wrap">
-    <div class="sec-head split rv-in"><div style="display:grid;gap:16px">{kicker("Massage & stretch lab")}<h2>The massage <em>menu</em></h2></div><p class="lead">Client favourites, from firm deep tissue to gentle lymphatic work. Add aromatherapy, hot stone, foot or scalp therapy to any session.</p></div>
-    {menu_block(MASSAGES[:6], MASSAGES[0][3])}
-    <div class="actions" style="margin-top:40px"><a class="btn btn-gold" href="massage.html">See the full menu &amp; enhancements</a></div>
-  </div>
-</section>
 <section>
   <div class="wrap">
-    <div class="sec-head split rv-in"><div style="display:grid;gap:16px">{kicker("Beauty & PMU studio")}<h2>Wake up <em>beautiful</em></h2></div><p class="lead">Soft, natural results with a free consultation for every permanent makeup service. Plus facials, lashes, waxing and nails.</p></div>
+    <div class="sec-head split rv-in"><div style="display:grid;gap:16px">{kicker("Permanent makeup & esthetics")}<h2>Our <em>signature</em> services</h2></div><p class="lead">Soft, natural results with a free consultation for every permanent makeup service. Plus facials, lashes, waxing and nails.</p></div>
     {bento()}
     <div class="actions" style="margin-top:36px"><a class="link" href="beauty.html">Explore all beauty services {ICON["arrow"]}</a></div>
+  </div>
+</section>
+<section class="dark" id="massage">
+  <div class="wrap">
+    <div class="sec-head split rv-in"><div style="display:grid;gap:16px">{kicker("Also at Rishya")}<h2>Massage <em>therapy</em></h2></div><p class="lead">Client favourites, from firm deep tissue to gentle lymphatic work. Add aromatherapy, hot stone, foot or scalp therapy to any session.</p></div>
+    {menu_block(MASSAGES[:6], MASSAGES[0][3])}
+    <div class="actions" style="margin-top:40px"><a class="btn btn-gold" href="massage.html">See the full menu &amp; enhancements</a></div>
   </div>
 </section>
 {therapist_block()}
